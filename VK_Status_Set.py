@@ -1,7 +1,5 @@
 import time
-
 import vk_api
-
 from config import main_token
 
 session = vk_api.VkApi(token=main_token)
