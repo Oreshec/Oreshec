@@ -11,9 +11,9 @@
 
 import vk_api
 from vk_api.longpoll import VkLongPoll, VkEventType
-from mtok import token, peer_id
+from config import main_token, peer_id
 
-session = vk_api.VkApi(token=token)
+session = vk_api.VkApi(token=main_token)
 vk = session.get_api()
 
 

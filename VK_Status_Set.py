@@ -2,7 +2,7 @@ import time
 
 import vk_api
 
-from key import main_token
+from config import main_token
 
 session = vk_api.VkApi(token=main_token)
 vk = session.get_api()

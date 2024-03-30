@@ -4,10 +4,10 @@ import time
 import traceback
 
 # Token file
-from config import token
+from config import main_token
 
 # authorization
-vk_session = vk_api.VkApi(token=token)
+vk_session = vk_api.VkApi(token=main_token)
 longpoll = VkLongPoll(vk_session)
 vk = vk_session.get_api()
 

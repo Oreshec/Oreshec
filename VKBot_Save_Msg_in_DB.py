@@ -3,9 +3,10 @@ from vk_api.longpoll import VkLongPoll, VkEventType
 
 import time
 import sqlite3
+import traceback
 
 # Token file
-from key import main_token
+from config import main_token
 
 # Base Data
 db = sqlite3.connect('base.db')
@@ -145,6 +146,7 @@ def main():
                     print('offline', event.offline_type)
 
         except Exception:
+            print(traceback.format_exc())
             for i in range(1, 11):
                 time.sleep(1)
                 print(f'{i}/10')
