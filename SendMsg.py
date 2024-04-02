@@ -13,13 +13,17 @@ import vk_api
 from vk_api.longpoll import VkLongPoll, VkEventType
 from config import main_token, peer_id
 
-session = vk_api.VkApi(token=main_token)
-vk = session.get_api()
-
 
 def send_msg():
-    msg = input("Введи сообщение: ")
-    vk.messages.send(peer_id=peer_id, message=msg, random_id=0)
+    while True:
+        try:
+            session = vk_api.VkApi(token=main_token)
+            vk = session.get_api()
+            msg = input("Введи сообщение: ")
+            vk.messages.send(peer_id=peer_id, message=msg, random_id=0)
+        except Exception as e:
+            print(e)
+            send_msg()
 
-while True:
-	send_msg()
+if __name__ == "__main__":
+    send_msg()
