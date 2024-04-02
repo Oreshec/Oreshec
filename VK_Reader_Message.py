@@ -45,69 +45,73 @@ def group_detector(event,vk):
 
 
 def main():
-    vk_session = vk_api.VkApi(token=main_token)
-    longpoll = VkLongPoll(vk_session)
-    vk = vk_session.get_api()
+    try:
+        vk_session = vk_api.VkApi(token=main_token)
+        longpoll = VkLongPoll(vk_session)
+        vk = vk_session.get_api()
 
-    print(f"Worked")
+        print(f"Worked")
 
-    for event in longpoll.listen():  # Запускаем процесс "прослушки"
+        for event in longpoll.listen():  # Запускаем процесс "прослушки"
 
-        if event.type == VkEventType.MESSAGE_NEW:  # Проверяем на условие нового сообщения
-        
-            print('New Message!')
-            print(time.asctime())
+            if event.type == VkEventType.MESSAGE_NEW:  # Проверяем на условие нового сообщения
+            
+                print('New Message!')
+                print(time.asctime())
 
-            if event.from_me:
-                print('From me for:', end=' ')
-                user_detector(event,vk)
-            elif event.to_me:
-                print('For me from:', end=' ')
-                user_detector(event,vk)
-            elif event.from_user:
-                print('From the user:', end=' ')
-                user_detector(event,vk)
-
-            if event.from_chat:
-                print('in chat:', end=' ')
-                chat_conversation(event.chat_id,vk)
-            elif event.from_group:
-                print('groups:', end=' ')
-                group_detector(event,vk)
-                
-            if event.text != "":
-                print('Text:', event.text, ' ')
-                print()
-            else:
-                print(f'Нет текста!\n')
-
-                # the user types a message
-            if event.type == VkEventType.USER_TYPING:
-                print(time.asctime(), end=' ')
-                user_detector(event,vk)
-                print('Typing... ')
-                if event.from_user:
-                    print(event.user_id)
+                if event.from_me:
+                    print('From me for:', end=' ')
                     user_detector(event,vk)
-                elif event.from_group:
-                    print('Group Administrator', event.group_id)
-            if event.type == VkEventType.USER_TYPING_IN_CHAT:
-                print(time.asctime())
-                print('Typing ')
-                user_detector(event,vk)
-                print('in chat', end=' ')
-                chat_conversation(event.chat_id,vk)
+                elif event.to_me:
+                    print('For me from:', end=' ')
+                    user_detector(event,vk)
+                elif event.from_user:
+                    print('From the user:', end=' ')
+                    user_detector(event,vk)
 
-            if event.type == VkEventType.USER_ONLINE:
-                print(time.asctime())
-                print('User')
-                user_detector(event,vk)
-                print('online', event.platform)
-            if event.type == VkEventType.USER_OFFLINE:
-                print(time.asctime())
-                print('User')
-                user_detector(event,vk)
-                print('offline', event.offline_type)
+                if event.from_chat:
+                    print('in chat:', end=' ')
+                    chat_conversation(event.chat_id,vk)
+                elif event.from_group:
+                    print('groups:', end=' ')
+                    group_detector(event,vk)
+                    
+                if event.text != "":
+                    print('Text:', event.text, ' ')
+                    print()
+                else:
+                    print(f'Нет текста!\n')
+
+                    # the user types a message
+                if event.type == VkEventType.USER_TYPING:
+                    print(time.asctime(), end=' ')
+                    user_detector(event,vk)
+                    print('Typing... ')
+                    if event.from_user:
+                        print(event.user_id)
+                        user_detector(event,vk)
+                    elif event.from_group:
+                        print('Group Administrator', event.group_id)
+                if event.type == VkEventType.USER_TYPING_IN_CHAT:
+                    print(time.asctime())
+                    print('Typing ')
+                    user_detector(event,vk)
+                    print('in chat', end=' ')
+                    chat_conversation(event.chat_id,vk)
+
+                if event.type == VkEventType.USER_ONLINE:
+                    print(time.asctime())
+                    print('User')
+                    user_detector(event,vk)
+                    print('online', event.platform)
+                if event.type == VkEventType.USER_OFFLINE:
+                    print(time.asctime())
+                    print('User')
+                    user_detector(event,vk)
+                    print('offline', event.offline_type)
+    except Exception as e:
+        print(e)
+        main()
 
 
 if __name__ == '__main__':
