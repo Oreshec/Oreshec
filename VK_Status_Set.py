@@ -2,6 +2,7 @@ import time
 import vk_api
 from config import main_token
 
+
 def status_set():
     while True:
         session = vk_api.VkApi(token=main_token)
