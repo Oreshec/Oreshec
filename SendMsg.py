@@ -10,7 +10,6 @@
 
 
 import vk_api
-from vk_api.longpoll import VkLongPoll, VkEventType
 from config import main_token, peer_id
 
 
@@ -24,6 +23,7 @@ def send_msg():
         except Exception as e:
             print(e)
             send_msg()
+
 
 if __name__ == "__main__":
     send_msg()
