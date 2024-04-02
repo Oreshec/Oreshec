@@ -1,3 +1,5 @@
 config.py
 base.db
 VKBot_Save_Msg_in_DB.py
+.idea
+__pycache__
